@@ -40,7 +40,7 @@ contexts:
     - match: ""
       pop: true
       push: body
-  body:
+  fenced-code-block:
     - match: |-
         (?x)^
         (?= [ ]{,3}>.
@@ -700,6 +700,8 @@ contexts:
             2: variable.language.fenced.markdown
             3: punctuation.definition.fenced.markdown
           pop: true
+  body:
+    - include: fenced-code-block
     - match: '^[ ]{0,3}([*+-])(?=\s)'
       captures:
         1: punctuation.definition.list_item.markdown
@@ -1199,6 +1201,7 @@ contexts:
           captures: 
             1: punctuation.definition.list_item.markdown
             2: punctuation.definition.list_item.number.markdown
+        - include: fenced-code-block
         - include: inline
   raw:
     - match: '(`+)([^`]|(?!(?<!`)\1(?!`))`)*+(\1)'
